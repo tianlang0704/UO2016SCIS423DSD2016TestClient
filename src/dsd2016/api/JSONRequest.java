@@ -36,17 +36,12 @@ public class JSONRequest
 	public JSONObject SyncSendJSON(JSONObject inObj) 
 			throws JSONException, MalformedURLException, IOException
 	{
-		return SyncSendJSON(inObj, HTTPMethod.POST, null);
-	}
-	
-	public JSONObject SyncSendJSON(JSONObject inObj, HTTPMethod meth) 
-			throws JSONException, MalformedURLException, IOException
-	{
-		return SyncSendJSON(inObj, meth, null);
+		return SyncSendJSON(inObj, HTTPMethod.POST);
 	}
 	//////////////////END wrappers for send method///////////////////////
 	
-	public JSONObject SyncSendJSON(JSONObject inObj, HTTPMethod meth, String outMsg) throws JSONException, IOException
+	public JSONObject SyncSendJSON(JSONObject inObj, HTTPMethod meth) 
+			throws JSONException, IOException
 	{	
 		URL urlObj;
 		HttpURLConnection con;
