@@ -5,7 +5,7 @@ This setting can be changed in the DSD2016JAVA.java file, it'll later become a s
 
 The structure and description of this module can be found in the image file:
 TestClient-JavaAPIModules.png
-![alt tag](TestClient-JavaAPIModules.png)
+![alt tag](TestClient-JavaAPIModules_v2.png)
 ___
 #### TODO:
 - *Add java image to base64 converter function
