@@ -9,6 +9,7 @@ import dsd2016.api.JSONRequest.HTTPMethod;
 
 public class DSD2016JAVA 
 {	
+	//Setting up API URLs, will change to set-able variable later
 	private static final String registerNewUserURL = "http://ix.cs.uoregon.edu:3555/api/register";
 	private static final String validateUserURL = "http://ix.cs.uoregon.edu:3555/api/authenticate";
 	private static final String verifyEmailURL = "http://ix.cs.uoregon.edu:3555/api/verify";
@@ -17,6 +18,7 @@ public class DSD2016JAVA
 			String name, String email, String password, String gender, 
 			ArrayList<String> inB64Pics, ArrayList<String> outB64BadPics, StringBuilder outMsg)
 	{
+		//Convert inputs to JSONObject
 		JSONObject content = new JSONObject();
 		content.put("name", name);
 		content.put("email", email);
@@ -25,7 +27,10 @@ public class DSD2016JAVA
 		content.put("picture", Base64ArrayToPicIdJSONArray(inB64Pics));
 		System.out.println("Sending JSON: " + content.toString());
 		
+		//Create a JSONRequest for sending request
 		JSONRequest req = new JSONRequest(registerNewUserURL);
+		
+		//Get response from the request, fill return messages, and return
 		JSONObject res;
 		try{
 			res = req.SyncSendJSON(content);
@@ -43,13 +48,17 @@ public class DSD2016JAVA
 	public int validateUser(
 			String email, String password, String inB64Pic, StringBuilder outMsg)
 	{
+		//Convert inputs to JSONObject
 		JSONObject content = new JSONObject();
 		content.put("email", email);
 		content.put("password", password);
 		content.put("picture", inB64Pic);
 		System.out.println("Sending JSON: " + content.toString());
 		
+		//Create a JSONRequest for sending request
 		JSONRequest req = new JSONRequest(validateUserURL);
+		
+		//Get response from the request, fill return messages, and return
 		JSONObject res;
 		try{
 			res = req.SyncSendJSON(content);
@@ -64,11 +73,15 @@ public class DSD2016JAVA
 	
 	public boolean verifyEmail(String email, StringBuilder outMsg)
 	{
+		//Convert inputs to JSONObject
 		JSONObject content = new JSONObject();
 		content.put("email", email);
 		System.out.println("Sending JSON: " + content.toString());
 		
+		//Create a JSONRequest for sending request
 		JSONRequest req = new JSONRequest(verifyEmailURL);
+		
+		//Get response from the request, fill return messages, and return
 		JSONObject res;
 		try{
 			res = req.SyncSendJSON(content, HTTPMethod.GET);
@@ -81,6 +94,7 @@ public class DSD2016JAVA
 		return res.getBoolean("success");
 	}
 	
+	//Helper function for converting a base64 array to JSON id and picture array
 	private JSONArray Base64ArrayToPicIdJSONArray(ArrayList<String> inB64Pics)
 	{
 		JSONArray pics = new JSONArray(); 
