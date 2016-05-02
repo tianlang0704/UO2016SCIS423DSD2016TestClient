@@ -51,10 +51,7 @@ public class Tests {
 		System.out.println("Message: " + outMsg1.toString() + "\n" + 
 				"Returned: " + ret1 + "\n");
 //		Expected output:
-//		registerNewUser test 1:
-//		Sending JSON: {"password":"123456789","gender":"Male","name":"Jeison Andres Hurtado","email":"yeison_andres94@hotmail.com","picture":[{"base64":"eRHR0cDovL3NhZHNhZnNhZnNmc2ZzYWY=","id":"0"},{"base64":"aHR0cDovL3NhZHNhZnNhZnNmc2ZzYWY=","id":"1"}]}
-//		Message: HTTP 500 server internal error
-//		Returned: 0
+		
 		
 		//validateUser test 1
 		System.out.println("validateUser test 1:");

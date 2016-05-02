@@ -18,6 +18,7 @@ ___
 - Added: Implementation of interface functions.
 - Added: Tests for all the function methods.
 - Added: Jar pack in the bin for GUI use.
+- Added: Expected results in tests
 
 ###### **2016 April 30**
 - Added: Initial creation of project.
