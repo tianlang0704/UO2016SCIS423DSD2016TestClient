@@ -16,6 +16,8 @@ public class Tests {
 		JSONRequest req1 = new JSONRequest("http://ix.cs.uoregon.edu:3555/api/verify/");
 		JSONObject res1 = req1.SyncSendJSON(new JSONObject("{\"email\":\"thisisemail@email.com\"}"), HTTPMethod.GET);
 		System.out.println("JSONRequest Test 1 response: " + res1.toString() + "\n");
+//		Expected output:
+//		JSONRequest Test 1 response: {"success":true,"message":"You can use this email","email":"thisisemail@email.com"}
 		
 		//JSONRequest Test 2
 		JSONRequest req2 = new JSONRequest("http://ix.cs.uoregon.edu:3555/api/authenticate/");
@@ -25,8 +27,11 @@ public class Tests {
 		content.put("picture", "eRHR0cDovL3NhZHNhZnNhZnNmc2ZzYWY=");
 		JSONObject res2 = req2.SyncSendJSON(new JSONObject(content)/*, HTTPMethod.POST*/);
 		System.out.println("JSONRequest Test 2 response: " + res2.toString() + "\n");
+//		Expected output:
+//		JSONRequest Test 2 response: {"success":false,"message":"The email or password was incorrect"}
 		
 		//registerNewUser test 1
+		//This test is not working, please skip
 		System.out.println("registerNewUser test 1:");
 		DSD2016JAVA japi1 = new DSD2016JAVA();
 		ArrayList<String> pics1 = new ArrayList<String>();
@@ -45,6 +50,11 @@ public class Tests {
 		
 		System.out.println("Message: " + outMsg1.toString() + "\n" + 
 				"Returned: " + ret1 + "\n");
+//		Expected output:
+//		registerNewUser test 1:
+//		Sending JSON: {"password":"123456789","gender":"Male","name":"Jeison Andres Hurtado","email":"yeison_andres94@hotmail.com","picture":[{"base64":"eRHR0cDovL3NhZHNhZnNhZnNmc2ZzYWY=","id":"0"},{"base64":"aHR0cDovL3NhZHNhZnNhZnNmc2ZzYWY=","id":"1"}]}
+//		Message: HTTP 500 server internal error
+//		Returned: 0
 		
 		//validateUser test 1
 		System.out.println("validateUser test 1:");
@@ -59,7 +69,12 @@ public class Tests {
 		
 		System.out.println("Message: " +  outMsg2.toString() + "\n" + 
 				"Returned: " + ret2 + "\n");
-		
+//		Expected output:
+//		validateUser test 1:
+//		Sending JSON: {"password":"123456789","email":"yeison_andres94@hotmail.com","picture":"eRH"}
+//		Message: User authenticated successfully
+//		Returned: 1
+
 		//validateUser test 2
 		System.out.println("validateUser test 2:");
 		DSD2016JAVA japi3 = new DSD2016JAVA();
@@ -73,6 +88,11 @@ public class Tests {
 		
 		System.out.println("Message: " +  outMsg3.toString() + "\n" + 
 				"Returned: " + ret3 + "\n");
+//		Expected output:
+//		validateUser test 2:
+//		Sending JSON: {"password":"1111111","email":"2222222","picture":"3123124ASDHFHGGTJ52342ASDG"}
+//		Message: The email or password was incorrect
+//		Returned: 0
 		
 		//verifyEmail test 1
 		System.out.println("verifyEmail test 1:");
@@ -82,6 +102,11 @@ public class Tests {
 		boolean ret4 = japi4.verifyEmail("yeison_andres94@hotmail.com", outMsg4);
 		System.out.println("Message: " +  outMsg4.toString() + "\n" + 
 				"Returned: " + ret4 + "\n");
+//		Expected output:
+//		verifyEmail test 1:
+//		Sending JSON: {"email":"yeison_andres94@hotmail.com"}
+//		Message: You can not use this email
+//		Returned: false
 		
 		//verifyEmail test 2
 		System.out.println("verifyEmail test 2:");
@@ -91,6 +116,11 @@ public class Tests {
 		boolean ret5 = japi5.verifyEmail("1112412123@123.com", outMsg5);
 		System.out.println("Message: " +  outMsg5.toString() + "\n" + 
 				"Returned: " + ret5 + "\n");
+//		Expected output:
+//		verifyEmail test 2:
+//		Sending JSON: {"email":"1112412123@123.com"}
+//		Message: You can use this email
+//		Returned: true
 		
 		//verifyEmail test 3
 		System.out.println("verifyEmail test 3:");
@@ -100,5 +130,10 @@ public class Tests {
 		boolean ret6 = japi6.verifyEmail("11124121231.com", outMsg6);
 		System.out.println("Message: " +  outMsg6.toString() + "\n" + 
 				"Returned: " + ret6 + "\n");
+//		Expected output:
+//		verifyEmail test 3:
+//		Sending JSON: {"email":"11124121231.com"}
+//		Message: This is not a email
+//		Returned: false
 	}
 }
