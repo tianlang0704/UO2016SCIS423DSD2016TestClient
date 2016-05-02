@@ -64,8 +64,10 @@ public class JSONRequest
 		
 		//receiving response
 		int httpCode = con.getResponseCode();
-		if(httpCode == 404)
-			throw new IOException("404 not found");
+		switch(httpCode){
+			case 404: throw new IOException("HTTP 404 not found");
+			case 500: throw new IOException("HTTP 500 server internal error");
+		}	
 		JSONTokener tokener = new JSONTokener(httpCode / 100 == 2 ? con.getInputStream() : con.getErrorStream());
 		return new JSONObject(tokener);
 	}
