@@ -1,0 +1,2 @@
+bin/*
+!bin/dsd2016api-java.jar

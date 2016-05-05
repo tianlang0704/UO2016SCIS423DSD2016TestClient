@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Name: dsd2016/api/
+Specification-Title: "DSD2016 JAVA API" 
+Specification-Version: "0.2"
+Specification-Vendor: "DSD2016".
+Implementation-Title: "dsd2016.api" 
+Implementation-Version: "1.1"
+Implementation-Vendor: "DSD2016"
