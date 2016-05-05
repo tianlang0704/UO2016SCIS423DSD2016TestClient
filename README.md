@@ -57,7 +57,7 @@ ___
 
 ####  **Change log**:
 
-###### **2016 May 1(specification ver 0.2, implementation ver 1.1)**
+###### **2016 May 4(specification ver 0.2, implementation ver 1.1)**
 - Modified: included org.json package into the project, producing only one JAR file.
 
 ###### **2016 May 1(specification ver 0.1, implementation ver 1.0)**
@@ -66,7 +66,7 @@ ___
 - Added: Jar pack in the bin for GUI use.
 - Added: Expected results in tests
 
-###### **2016 April 30** (specification ver 0.1, implementation ver 0.1)**
+###### **2016 April 30 (specification ver 0.1, implementation ver 0.1)**
 - Added: Initial creation of project.
 - Added: JSONRequest module that helps sending and receiving messages.
 - Added: Test entry point for convenience.
