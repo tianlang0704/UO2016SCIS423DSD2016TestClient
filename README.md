@@ -37,6 +37,9 @@ public class test {
 ```
 
 #### **Description**:
+Current snapshot of the companion specification:
+(https://docs.google.com/document/d/101paqEpshmsjjWuJHrcSxw1_QuSP1nzljuBxdeXQQ48/edit?usp=sharing)
+
 This is the JavaAPI for accessing DSD2016 login and facial recognition project.
 It is currently linked to UNC authentication server hosted at ix.cs.uoregon.edu:3555
 This setting can be changed in the DSD2016JAVA.java file, it'll later become a set-able variable.
