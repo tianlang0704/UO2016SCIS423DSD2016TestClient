@@ -9,7 +9,8 @@ Method A) Add Precompiled JAR to the Project(Eclipse): <br/>
 Method B) Use git or download source directly: <br/>
 
 1. Copy and paste src folder into your project and use it directly.
-	
+
+
 Example: 
 test.java
 ```
