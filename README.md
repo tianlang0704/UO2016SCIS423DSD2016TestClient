@@ -1,21 +1,32 @@
 #### **How To Use**:
-Method A) Add Precompiled JAR to the Project(Eclipse):
-	1. Download the precompiled jar file in bin/dsd2016api-java.jar
-	2. Open project property -> JAVA Build Path
-	3. Click Add JARs or Add External JARs depending on where you placed the download file
-	4. Click OK to apply the change.
-Method B) Use git or download source directly
-	1. Copy and paste src folder into your project and use it directly.
+Method A) Add Precompiled JAR to the Project(Eclipse): <br/>
+
+1. Download the precompiled jar file: bin/dsd2016api-java.jar <br/>
+2. Open project property -> JAVA Build Path <br/>
+3. Click Add JARs or Add External JARs depending on where you placed the downloaded file <br/>
+4. Click OK to apply the change. <br/>
+
+Method B) Use git or download source directly: <br/>
+
+1. Copy and paste src folder into your project and use it directly.
 	
 Example: 
 test.java
 ```
+//Import package
 import dsd2016.api.DSD2016JAVA;
+
 public class test {
 	static public void main(String[] args)
 	{
+		//Create an object to access DSD2016 server
 		DSD2016JAVA api = new DSD2016JAVA();
+		
+		//Create a StringBuilder to receive message
 		StringBuilder outMsg = new StringBuilder();
+		
+		//Using verifyEmail access method to query about availability of the email address
+		//and print out the results
 		if(api.verifyEmail("example@email.com", outMsg) == true)
 			System.out.println("Success: " + outMsg.toString());
 		else
