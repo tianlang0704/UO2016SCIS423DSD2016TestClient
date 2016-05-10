@@ -33,13 +33,12 @@ public class Tests {
 		//registerNewUser test 1
 		//This test is not working, please skip
 		System.out.println("registerNewUser test 1:");
-		DSD2016JAVA japi1 = new DSD2016JAVA();
 		ArrayList<String> pics1 = new ArrayList<String>();
 		pics1.add("eRHR0cDovL3NhZHNhZnNhZnNmc2ZzYWY=");
 		pics1.add("aHR0cDovL3NhZHNhZnNhZnNmc2ZzYWY=");
 		StringBuilder outMsg1 = new StringBuilder();
 		
-		int ret1 = japi1.registerNewUser(
+		int ret1 = DSD2016JAVA.registerNewUser(
 						"Jeison Andres Hurtado", 
 						"yeison_andres94@hotmail.com", 
 						"123456789", 
@@ -55,10 +54,9 @@ public class Tests {
 		
 		//validateUser test 1
 		System.out.println("validateUser test 1:");
-		DSD2016JAVA japi2 = new DSD2016JAVA();
 		StringBuilder outMsg2 = new StringBuilder();
 		
-		int ret2 = japi2.validateUser(
+		int ret2 = DSD2016JAVA.validateUser(
 						"yeison_andres94@hotmail.com", 
 						"123456789", 
 						"eRHR0cDovL3NhZHNhZnNhZnNmc2ZzYWY=",
@@ -74,10 +72,9 @@ public class Tests {
 
 		//validateUser test 2
 		System.out.println("validateUser test 2:");
-		DSD2016JAVA japi3 = new DSD2016JAVA();
 		StringBuilder outMsg3 = new StringBuilder();
 		
-		int ret3 = japi3.validateUser(
+		int ret3 = DSD2016JAVA.validateUser(
 						"2222222", 
 						"1111111", 
 						"3123124ASDHFHGGTJ52342ASDG",
@@ -93,10 +90,9 @@ public class Tests {
 		
 		//verifyEmail test 1
 		System.out.println("verifyEmail test 1:");
-		DSD2016JAVA japi4 = new DSD2016JAVA();
 		StringBuilder outMsg4 = new StringBuilder();
 		
-		boolean ret4 = japi4.verifyEmail("yeison_andres94@hotmail.com", outMsg4);
+		boolean ret4 = DSD2016JAVA.verifyEmail("yeison_andres94@hotmail.com", outMsg4);
 		System.out.println("Message: " +  outMsg4.toString() + "\n" + 
 				"Returned: " + ret4 + "\n");
 //		Expected output:
@@ -107,10 +103,9 @@ public class Tests {
 		
 		//verifyEmail test 2
 		System.out.println("verifyEmail test 2:");
-		DSD2016JAVA japi5 = new DSD2016JAVA();
 		StringBuilder outMsg5 = new StringBuilder();
 		
-		boolean ret5 = japi5.verifyEmail("1112412123@123.com", outMsg5);
+		boolean ret5 = DSD2016JAVA.verifyEmail("1112412123@123.com", outMsg5);
 		System.out.println("Message: " +  outMsg5.toString() + "\n" + 
 				"Returned: " + ret5 + "\n");
 //		Expected output:
@@ -121,10 +116,9 @@ public class Tests {
 		
 		//verifyEmail test 3
 		System.out.println("verifyEmail test 3:");
-		DSD2016JAVA japi6 = new DSD2016JAVA();
 		StringBuilder outMsg6 = new StringBuilder();
 		
-		boolean ret6 = japi6.verifyEmail("11124121231.com", outMsg6);
+		boolean ret6 = DSD2016JAVA.verifyEmail("11124121231.com", outMsg6);
 		System.out.println("Message: " +  outMsg6.toString() + "\n" + 
 				"Returned: " + ret6 + "\n");
 //		Expected output:

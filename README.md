@@ -20,15 +20,12 @@ import dsd2016.api.DSD2016JAVA;
 public class test {
 	static public void main(String[] args)
 	{
-		//Create an object to access DSD2016 server
-		DSD2016JAVA api = new DSD2016JAVA();
-		
 		//Create a StringBuilder to receive message
 		StringBuilder outMsg = new StringBuilder();
 		
 		//Using verifyEmail access method to query about availability of the email address
 		//and print out the results
-		if(api.verifyEmail("example@email.com", outMsg) == true)
+		if(DSD2016JAVA.verifyEmail("example@email.com", outMsg) == true)
 			System.out.println("Success: " + outMsg.toString());
 		else
 			System.out.println("Fail: " + outMsg.toString());
@@ -57,14 +54,17 @@ ___
 
 ####  **Change log**:
 
+###### **2016 May 9(specification ver 0.4, implementation ver 1.2)**
+- Modified: Changed all the access methods to static for programmatic correctness and ease of use. (Bryon)
+
 ###### **2016 May 4(specification ver 0.2, implementation ver 1.1)**
-- Modified: included org.json package into the project, producing only one JAR file.
+- Modified: Included org.json package into the project, producing only one JAR file.
 
 ###### **2016 May 1(specification ver 0.1, implementation ver 1.0)**
 - Added: Implementation of interface functions.
 - Added: Tests for all the function methods.
 - Added: Jar pack in the bin for GUI use.
-- Added: Expected results in tests
+- Added: Expected results in tests.
 
 ###### **2016 April 30 (specification ver 0.1, implementation ver 0.1)**
 - Added: Initial creation of project.

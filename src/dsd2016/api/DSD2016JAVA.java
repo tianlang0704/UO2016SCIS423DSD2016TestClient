@@ -14,7 +14,7 @@ public class DSD2016JAVA
 	private static final String validateUserURL = "http://ix.cs.uoregon.edu:3555/api/authenticate";
 	private static final String verifyEmailURL = "http://ix.cs.uoregon.edu:3555/api/verify";
 	
-	public int registerNewUser(
+	public static int registerNewUser(
 			String name, String email, String password, String gender, 
 			ArrayList<String> inB64Pics, ArrayList<String> outB64BadPics, StringBuilder outMsg)
 	{
@@ -45,7 +45,7 @@ public class DSD2016JAVA
 	
 	
 	
-	public int validateUser(
+	public static int validateUser(
 			String email, String password, String inB64Pic, StringBuilder outMsg)
 	{
 		//Convert inputs to JSONObject
@@ -71,7 +71,7 @@ public class DSD2016JAVA
 		return res.getBoolean("success") ? 1 : 0;
 	}
 	
-	public boolean verifyEmail(String email, StringBuilder outMsg)
+	public static boolean verifyEmail(String email, StringBuilder outMsg)
 	{
 		//Convert inputs to JSONObject
 		JSONObject content = new JSONObject();
@@ -95,7 +95,7 @@ public class DSD2016JAVA
 	}
 	
 	//Helper function for converting a base64 array to JSON id and picture array
-	private JSONArray Base64ArrayToPicIdJSONArray(ArrayList<String> inB64Pics)
+	private static JSONArray Base64ArrayToPicIdJSONArray(ArrayList<String> inB64Pics)
 	{
 		JSONArray pics = new JSONArray(); 
 		for(Integer i = 0; i < inB64Pics.size(); i++){
