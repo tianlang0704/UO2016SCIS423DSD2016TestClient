@@ -44,7 +44,7 @@ This setting can be changed in the DSD2016JAVA.java file, it'll later become a s
 The structure and description of this module can be found in the image file:
 TestClient-JavaAPIModules.png
 <br/>
-![alt tag](TestClient-JavaAPIModules_v2.png)
+![alt tag](TestClient-JavaAPIModules_v3.png)
 ___
 #### **TODO**:
 - *Add java image to base64 converter function
@@ -53,6 +53,9 @@ ___
 ___
 
 ####  **Change log**:
+
+###### **2016 May 14(specification ver 1.0, implementation ver 2.0)**
+- Modified: Updated to the new integration standard.
 
 ###### **2016 May 9(specification ver 0.4, implementation ver 1.2)**
 - Modified: Changed all the access methods to static for programmatic correctness and ease of use. (Bryon)
