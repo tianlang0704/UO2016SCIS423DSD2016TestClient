@@ -23,12 +23,15 @@ public class test {
 		//Create a StringBuilder to receive message
 		StringBuilder outMsg = new StringBuilder();
 		
-		//Using verifyEmail access method to query about availability of the email address
-		//and print out the results
-		if(DSD2016JAVA.verifyEmail("example@email.com", outMsg) == true)
-			System.out.println("Success: " + outMsg.toString());
-		else
-			System.out.println("Fail: " + outMsg.toString());
+		//Call api to validate a user with a base64 picture and a ID
+		int ret = DSD2016JAVA.validateUser(
+						"96cb7a81a34dd0888ea4fedbb42745e7893179b", 
+						"3123124ASDHFHGGTJ52342ASDG",
+						outMsg);
+		
+		//Print out the results
+		System.out.println("Message: " +  outMsg.toString() + "\n" + 
+				"Returned: " + ret + "\n");
 	}
 }
 ```
