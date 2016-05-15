@@ -7,25 +7,31 @@ import java.util.ArrayList;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import dsd2016.api.JSONRequest.HTTPMethod;
-
 public class Tests {
 	public static void main(String args[]) throws JSONException, MalformedURLException, IOException
 	{
 		//JSONRequest Test 1
-		JSONRequest req1 = new JSONRequest("http://ix.cs.uoregon.edu:3555/api/verify/");
-		JSONObject res1 = req1.SyncSendJSON(new JSONObject("{\"email\":\"thisisemail@email.com\"}"), HTTPMethod.GET);
-		System.out.println("JSONRequest Test 1 response: " + res1.toString() + "\n");
+		JSONRequest req1 = new JSONRequest(DSD2016JAVA.registerURL);
+		JSONObject content1 = new JSONObject();
+		ArrayList<String> inB64Pics = new ArrayList<String>();
+		inB64Pics.add("asdnasljdbjasbsdkajbflksbfkasbfhfa");
+		inB64Pics.add("Baseojdasfjbsjodsjabfkjbsadkñfjh");
+		content1.put("pictures", DSD2016JAVA.Base64ArrayToPicIdJSONArray(inB64Pics));
+		System.out.println(content1.toString());
+		
+		JSONObject res1 = req1.SyncSendJSON(content1);
+		System.out.println("JSONRequest Test 1 response: " + res1.getBoolean("success") + "\n");
 //		Expected output:
 //		JSONRequest Test 1 response: {"success":true,"message":"You can use this email","email":"thisisemail@email.com"}
 		
 		//JSONRequest Test 2
-		JSONRequest req2 = new JSONRequest("http://ix.cs.uoregon.edu:3555/api/authenticate/");
-		JSONObject content = new JSONObject();
-		content.put("email", "user_email");
-		content.put("password", "password");
-		content.put("picture", "eRHR0cDovL3NhZHNhZnNhZnNmc2ZzYWY=");
-		JSONObject res2 = req2.SyncSendJSON(new JSONObject(content)/*, HTTPMethod.POST*/);
+		JSONRequest req2 = new JSONRequest(DSD2016JAVA.loginUserURL);
+		JSONObject content2 = new JSONObject();
+		content2.put("userId", "96cb7a81a34dd0888ea4fedbb42745e7893179b1");
+		content2.put("picture", "asdnasljdbjasbsdkajbflksbfkasbfhfa");
+		System.out.println(content2.toString());
+		
+		JSONObject res2 = req2.SyncSendJSON(content2);
 		System.out.println("JSONRequest Test 2 response: " + res2.toString() + "\n");
 //		Expected output:
 //		JSONRequest Test 2 response: {"success":false,"message":"The email or password was incorrect"}
@@ -36,16 +42,10 @@ public class Tests {
 		ArrayList<String> pics1 = new ArrayList<String>();
 		pics1.add("eRHR0cDovL3NhZHNhZnNhZnNmc2ZzYWY=");
 		pics1.add("aHR0cDovL3NhZHNhZnNhZnNmc2ZzYWY=");
+		ArrayList<String> errorPics1 = new ArrayList<String>();
 		StringBuilder outMsg1 = new StringBuilder();
 		
-		int ret1 = DSD2016JAVA.registerNewUser(
-						"Jeison Andres Hurtado", 
-						"yeison_andres94@hotmail.com", 
-						"123456789", 
-						"Male", 
-						pics1, 
-						null, 
-						outMsg1);
+		int ret1 = DSD2016JAVA.registerNewUser(pics1, errorPics1, outMsg1);
 		
 		System.out.println("Message: " + outMsg1.toString() + "\n" + 
 				"Returned: " + ret1 + "\n");
@@ -57,9 +57,8 @@ public class Tests {
 		StringBuilder outMsg2 = new StringBuilder();
 		
 		int ret2 = DSD2016JAVA.validateUser(
-						"yeison_andres94@hotmail.com", 
-						"123456789", 
-						"eRHR0cDovL3NhZHNhZnNhZnNmc2ZzYWY=",
+						"96cb7a81a34dd0888ea4fedbb42745e7893179b1", 
+						"asdnasljdbjasbsdkajbflksbfkasbfhfa",
 						outMsg2);
 		
 		System.out.println("Message: " +  outMsg2.toString() + "\n" + 
@@ -75,8 +74,7 @@ public class Tests {
 		StringBuilder outMsg3 = new StringBuilder();
 		
 		int ret3 = DSD2016JAVA.validateUser(
-						"2222222", 
-						"1111111", 
+						"96cb7a81a34dd0888ea4fedbb42745e7893179b", 
 						"3123124ASDHFHGGTJ52342ASDG",
 						outMsg3);
 		
@@ -87,44 +85,5 @@ public class Tests {
 //		Sending JSON: {"password":"1111111","email":"2222222","picture":"3123124ASDHFHGGTJ52342ASDG"}
 //		Message: The email or password was incorrect
 //		Returned: 0
-		
-		//verifyEmail test 1
-		System.out.println("verifyEmail test 1:");
-		StringBuilder outMsg4 = new StringBuilder();
-		
-		boolean ret4 = DSD2016JAVA.verifyEmail("yeison_andres94@hotmail.com", outMsg4);
-		System.out.println("Message: " +  outMsg4.toString() + "\n" + 
-				"Returned: " + ret4 + "\n");
-//		Expected output:
-//		verifyEmail test 1:
-//		Sending JSON: {"email":"yeison_andres94@hotmail.com"}
-//		Message: You can not use this email
-//		Returned: false
-		
-		//verifyEmail test 2
-		System.out.println("verifyEmail test 2:");
-		StringBuilder outMsg5 = new StringBuilder();
-		
-		boolean ret5 = DSD2016JAVA.verifyEmail("1112412123@123.com", outMsg5);
-		System.out.println("Message: " +  outMsg5.toString() + "\n" + 
-				"Returned: " + ret5 + "\n");
-//		Expected output:
-//		verifyEmail test 2:
-//		Sending JSON: {"email":"1112412123@123.com"}
-//		Message: You can use this email
-//		Returned: true
-		
-		//verifyEmail test 3
-		System.out.println("verifyEmail test 3:");
-		StringBuilder outMsg6 = new StringBuilder();
-		
-		boolean ret6 = DSD2016JAVA.verifyEmail("11124121231.com", outMsg6);
-		System.out.println("Message: " +  outMsg6.toString() + "\n" + 
-				"Returned: " + ret6 + "\n");
-//		Expected output:
-//		verifyEmail test 3:
-//		Sending JSON: {"email":"11124121231.com"}
-//		Message: This is not a email
-//		Returned: false
 	}
 }
