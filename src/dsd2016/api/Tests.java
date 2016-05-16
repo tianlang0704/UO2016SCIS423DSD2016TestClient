@@ -20,9 +20,9 @@ public class Tests {
 		System.out.println(content1.toString());
 		
 		JSONObject res1 = req1.SyncSendJSON(content1);
-		System.out.println("JSONRequest Test 1 response: " + res1.getBoolean("success") + "\n");
+		System.out.println("JSONRequest Test 1 response: " + res1.toString() + "\n");
 //		Expected output:
-//		JSONRequest Test 1 response: {"success":true,"message":"You can use this email","email":"thisisemail@email.com"}
+//		JSONRequest Test 1 response: {"facilitatorIds":null,"success":false,"errors":[{"pictureId":0,"errorMessage":"There is something unknown wrong with the image.","errorCode":3},{"pictureId":1,"errorMessage":"There is something unknown wrong with the image.","errorCode":3}]}
 		
 		//JSONRequest Test 2
 		JSONRequest req2 = new JSONRequest(DSD2016JAVA.loginUserURL);
@@ -34,22 +34,30 @@ public class Tests {
 		JSONObject res2 = req2.SyncSendJSON(content2);
 		System.out.println("JSONRequest Test 2 response: " + res2.toString() + "\n");
 //		Expected output:
-//		JSONRequest Test 2 response: {"success":false,"message":"The email or password was incorrect"}
+//		JSONRequest Test 2 response: {"success":false,"errors":[{"errorMessage":"User does not exist.","errorCode":10}]}
 		
 		//registerNewUser test 1
 		//This test is not working, please skip
 		System.out.println("registerNewUser test 1:");
 		ArrayList<String> pics1 = new ArrayList<String>();
-		pics1.add("eRHR0cDovL3NhZHNhZnNhZnNmc2ZzYWY=");
-		pics1.add("aHR0cDovL3NhZHNhZnNhZnNmc2ZzYWY=");
+		pics1.add("eRHR0cDovL3NhZHNhZnNhZnNmc2ZzYWY");
+		pics1.add("aHR0cDovL3NhZHNhZnNhZnNmc2ZzYWY");
 		ArrayList<String> errorPics1 = new ArrayList<String>();
 		StringBuilder outMsg1 = new StringBuilder();
 		
 		int ret1 = DSD2016JAVA.registerNewUser(pics1, errorPics1, outMsg1);
 		
 		System.out.println("Message: " + outMsg1.toString() + "\n" + 
-				"Returned: " + ret1 + "\n");
+				"Returned: " + ret1 + "\n" +
+				"Error pic 0: " + errorPics1.get(0) + "\n" + 
+				"Error pic 1: " + errorPics1.get(1) + "\n");
 //		Expected output:
+//		registerNewUser test 1:
+//			Sending JSON: {"pictures":[{"pictureId":"0","base64":"eRHR0cDovL3NhZHNhZnNhZnNmc2ZzYWY="},{"pictureId":"1","base64":"aHR0cDovL3NhZHNhZnNhZnNmc2ZzYWY="}]}
+//			Message: Registration failed, check picture error message.
+//			Returned: 0
+//			Error pic 0: 0,3,There is something unknown wrong with the image.
+//			Error pic 1: 0,3,There is something unknown wrong with the image.
 		
 		
 		//validateUser test 1
@@ -65,9 +73,9 @@ public class Tests {
 				"Returned: " + ret2 + "\n");
 //		Expected output:
 //		validateUser test 1:
-//		Sending JSON: {"password":"123456789","email":"yeison_andres94@hotmail.com","picture":"eRH"}
-//		Message: User authenticated successfully
-//		Returned: 1
+//			Sending JSON: {"userId":"96cb7a81a34dd0888ea4fedbb42745e7893179b1","picture":"asdnasljdbjasbsdkajbflksbfkasbfhfa"}
+//			Message: Login failed,10,User does not exist.
+//			Returned: 0
 
 		//validateUser test 2
 		System.out.println("validateUser test 2:");
@@ -82,8 +90,8 @@ public class Tests {
 				"Returned: " + ret3 + "\n");
 //		Expected output:
 //		validateUser test 2:
-//		Sending JSON: {"password":"1111111","email":"2222222","picture":"3123124ASDHFHGGTJ52342ASDG"}
-//		Message: The email or password was incorrect
-//		Returned: 0
+//			Sending JSON: {"userId":"96cb7a81a34dd0888ea4fedbb42745e7893179b","picture":"3123124ASDHFHGGTJ52342ASDG"}
+//			Message: Login failed,10,User does not exist.
+//			Returned: 0
 	}
 }

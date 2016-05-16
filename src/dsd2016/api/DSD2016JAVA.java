@@ -10,7 +10,6 @@ public class DSD2016JAVA
 	//Setting up API URLs, will change to set-able variable later
 	public static final String registerURL = "http://ix.cs.uoregon.edu:1337/register";
 	public static final String loginUserURL = "http://ix.cs.uoregon.edu:1337/login";
-	//private static final String verifyEmailURL = "http://ix.cs.uoregon.edu:1337/verify";
 	
 	//Defining error codes
 	public static final int ERRORCODE_REGISTER_SUCCESS = 1;
@@ -123,29 +122,6 @@ public class DSD2016JAVA
 			return ERRORCODE_LOGIN_UNKNOWN;
 		}
 	}
-	
-//	public static boolean verifyEmail(String email, StringBuilder outMsg)
-//	{
-//		//Convert inputs to JSONObject
-//		JSONObject content = new JSONObject();
-//		content.put("email", email);
-//		System.out.println("Sending JSON: " + content.toString());
-//		
-//		//Create a JSONRequest for sending request
-//		JSONRequest req = new JSONRequest(verifyEmailURL);
-//		
-//		//Get response from the request, fill return messages, and return
-//		JSONObject res;
-//		try{
-//			res = req.SyncSendJSON(content, HTTPMethod.GET);
-//		}catch(Exception e){
-//			outMsg.append(e.getMessage());
-//			return false;
-//		}
-//		
-//		outMsg.append(res.getString("message"));
-//		return res.getBoolean("success");
-//	}
 	
 	//Helper function for converting a base64 array to JSON id and picture array
 	public static JSONArray Base64ArrayToPicIdJSONArray(ArrayList<String> inB64Pics)
