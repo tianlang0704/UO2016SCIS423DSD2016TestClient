@@ -50,12 +50,18 @@ TestClient-JavaAPIModules.png
 ![alt tag](TestClient-JavaAPIModules_v3.png)
 ___
 #### **TODO**:
-- *Add java image to base64 converter function
-- *Add wrapper function for using a list of image instead of base64 image string, converted through the converting function.
+None for now.
 <br/>
 ___
 
 ####  **Change log**:
+
+###### **2016 May 26(specification ver 2.0, implementation ver 2.1)**
+- Added: Async variants of access methods.
+- Added: Variants to accept Java BufferedImage objects directly.
+- Added: Variants that shrink images for performance.
+- Added: Helper functions to convert and shrink images.
+- Added: tests for asynchronous calling and lambda function.
 
 ###### **2016 May 14(specification ver 1.0, implementation ver 2.0)**
 - Modified: Updated to the new integration standard.

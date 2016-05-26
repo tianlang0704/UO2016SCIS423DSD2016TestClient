@@ -26,7 +26,7 @@ public class JSONRequest
 		m_URLstr = urlStr;
 	}
 	
-	//////////////////wrappers for send method//////////////////////////
+	//////////////////Sync send methods//////////////////////////////////
 	public JSONObject SyncSendJSON() 
 			throws JSONException, MalformedURLException, IOException
 	{
@@ -38,7 +38,6 @@ public class JSONRequest
 	{
 		return SyncSendJSON(inObj, HTTPMethod.POST);
 	}
-	//////////////////END wrappers for send method///////////////////////
 	
 	public JSONObject SyncSendJSON(JSONObject inObj, HTTPMethod meth) 
 			throws JSONException, IOException
@@ -71,4 +70,5 @@ public class JSONRequest
 		JSONTokener tokener = new JSONTokener(httpCode / 100 == 2 ? con.getInputStream() : con.getErrorStream());
 		return new JSONObject(tokener);
 	}
+	//////////////////END sync send methods//////////////////////////////
 }
