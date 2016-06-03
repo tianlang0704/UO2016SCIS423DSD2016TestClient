@@ -16,9 +16,10 @@ import org.json.JSONObject;
 public class DSD2016JAVA 
 {	
 	//Setting up API URLs, will change to set-able variable later
-	public static final String registerURL = "http://ix.cs.uoregon.edu:1337/register";
-	public static final String loginUserURL = "http://ix.cs.uoregon.edu:1337/login";
-	
+//	public static final String registerURL = "http://ix.cs.uoregon.edu:1337/register";
+//	public static final String loginUserURL = "http://ix.cs.uoregon.edu:1337/login";
+	public static final String registerURL = "http://ix.cs.uoregon.edu:8888/JLU_AuthServer/register";
+	public static final String loginUserURL = "http://ix.cs.uoregon.edu:8888/JLU_AuthServer/login";
 	//Defining error codes
 	public static final int ERRORCODE_REGISTER_SUCCESS = 1;
 	public static final int ERRORCODE_REGISTER_FAIL = 0;
@@ -105,13 +106,16 @@ public class DSD2016JAVA
 		JSONObject res;
 		try{
 			res = req.SyncSendJSON(content);
+		}catch(org.json.JSONException e){
+			outMsg.append("Server did not return a JSON object.");
+			return ERRORCODE_REGISTER_IO_ERROR;
 		}catch(Exception e){
 			outMsg.append(e.getMessage());
 			return ERRORCODE_REGISTER_IO_ERROR;
 		}
 		
 		//Deal with the errors
-		if(res.getBoolean("success")){//Success
+		if(res.has("success") && res.getBoolean("success")){//Success
 			outMsg.append(res.getString("userId"));
 			return ERRORCODE_REGISTER_SUCCESS;
 		}else if(res.has("errors")){//If errors section is found
@@ -238,7 +242,7 @@ public class DSD2016JAVA
 		
 		
 		//Deal with the errors
-		if(res.getBoolean("success")){//Success
+		if(res.has("success") && res.getBoolean("success")){//Success
 			outMsg.append("Login success");
 			return ERRORCODE_LOGIN_SUCCESS;
 		}else if(res.has("errors")){//If errors section is found

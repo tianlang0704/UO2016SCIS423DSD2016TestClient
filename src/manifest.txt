@@ -1,8 +1,8 @@
-Manifest-Version: 2.0
+Manifest-Version: 2.0.1
 Name: dsd2016/api/
 Specification-Title: "DSD2016 JAVA API" 
 Specification-Version: "2.0"
 Specification-Vendor: "DSD2016".
 Implementation-Title: "dsd2016.api" 
-Implementation-Version: "2.1"
+Implementation-Version: "2.1.1"
 Implementation-Vendor: "DSD2016"

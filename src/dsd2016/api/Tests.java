@@ -2,14 +2,13 @@ package dsd2016.api;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import javax.imageio.ImageIO;
 import java.io.IOException;
 import java.net.MalformedURLException;
 //import java.nio.charset.Charset;
 //import java.nio.file.Files;
 //import java.nio.file.Paths;
 import java.util.ArrayList;
-
-import javax.imageio.ImageIO;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,9 +17,9 @@ public class Tests {
 	public static void main(String args[]) throws JSONException, MalformedURLException, IOException
 	{
 //		//Temporary test
-//		BufferedImage pic0 = ImageIO.read(new File("D:\\[C]Temp\\test1.png"));
+//		BufferedImage pic0 = ImageIO.read(new File("D:\\[C]Temp\\face1.png"));
 //		DSD2016JAVA.asyncRsImgValidateUser(
-//				"4e45642a-231b-11e6-b9fd-525400028af0",
+//				"98dce83da57b0395e163467c9dae521b",
 //				pic0,
 //				(int outErrorCode, 
 //				 ArrayList<String> outB64BadPics, 
@@ -32,30 +31,29 @@ public class Tests {
 //		try {
 //			Thread.sleep(100000);
 //		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-		//Temporary test
-		ArrayList<BufferedImage> pics0 = new ArrayList<BufferedImage>();
-		for(int i = 1; i <= 8; i++)
-		    pics0.add(ImageIO.read(new File("D:\\[C]Temp\\test" + Integer.toString(i) + ".png")));
-		DSD2016JAVA.asyncRsImgRegisterNewUser(
-				pics0, 
-		        new DSD2016JAVACallBack(){
-					public void call(
-						int outErrorCode, 
-					    ArrayList<String> outB64BadPics, 
-					    StringBuilder outMsg){
-		    System.out.println("Message: " + outMsg.toString() + "\n" + 
-		            "Returned: " + outErrorCode + "\n");
-		}});
-
-		try {
-		    Thread.sleep(100000);
-		} catch (InterruptedException e) {
-		    // TODO Auto-generated catch block
-		    e.printStackTrace();
-		}
+//		
+//		//Temporary test
+//		ArrayList<BufferedImage> pics0 = new ArrayList<BufferedImage>();
+//		for(int i = 1; i <= 8; i++)
+//		    pics0.add(ImageIO.read(new File("D:\\[C]Temp\\face1.png")));
+//		DSD2016JAVA.asyncRsImgRegisterNewUser(
+//				pics0, 
+//		        new DSD2016JAVACallBack(){
+//					public void call(
+//						int outErrorCode, 
+//					    ArrayList<String> outB64BadPics, 
+//					    StringBuilder outMsg){
+//		    System.out.println("Message: " + outMsg.toString() + "\n" + 
+//		            "Returned: " + outErrorCode + "\n");
+//		}});
+//
+//		try {
+//		    Thread.sleep(100000);
+//		} catch (InterruptedException e) {
+//		    e.printStackTrace();
+//		}
 		
 		//JSONRequest Test 1
 		JSONRequest req1 = new JSONRequest(DSD2016JAVA.registerURL);
@@ -66,7 +64,12 @@ public class Tests {
 		content1.put("pictures", DSD2016JAVA.Base64ArrayToPicIdJSONArray(inB64Pics));
 		System.out.println(content1.toString());
 		
-		JSONObject res1 = req1.SyncSendJSON(content1);
+		JSONObject res1;
+		try{
+			res1 = req1.SyncSendJSON(content1);
+		}catch(org.json.JSONException e){
+			res1 = new JSONObject("{\"error:\" : \"Server returned nonsense.\"}");
+		}
 		System.out.println("JSONRequest Test 1 response: " + res1.toString() + "\n");
 //		Expected output:
 //		JSONRequest Test 1 response: {"facilitatorIds":null,"success":false,"errors":[{"pictureId":0,"errorMessage":"There is something unknown wrong with the image.","errorCode":3},{"pictureId":1,"errorMessage":"There is something unknown wrong with the image.","errorCode":3}]}
@@ -79,7 +82,12 @@ public class Tests {
 		content2.put("picture", "asdnasljdbjasbsdkajbflksbfkasbfhfa");
 		System.out.println(content2.toString());
 		
-		JSONObject res2 = req2.SyncSendJSON(content2);
+		JSONObject res2;
+		try{
+			res2 = req2.SyncSendJSON(content2);
+		}catch(org.json.JSONException e){
+			res2 = new JSONObject("{\"error:\" : \"Server returned nonsense.\"}");
+		}
 		System.out.println("JSONRequest Test 2 response: " + res2.toString() + "\n");
 //		Expected output:
 //		JSONRequest Test 2 response: {"success":false,"errors":[{"errorMessage":"User does not exist.","errorCode":10}]}
@@ -95,10 +103,11 @@ public class Tests {
 		
 		int ret1 = DSD2016JAVA.registerNewUser(pics1, errorPics1, outMsg1);
 		
+		String errStr1 = new String();
+		for(int i = 0; i < errorPics1.size(); i++)
+			errStr1 += "Error pic "+ Integer.toString(i) +": " + errorPics1.get(i) + "\n";
 		System.out.println("Message: " + outMsg1.toString() + "\n" + 
-				"Returned: " + ret1 + "\n" +
-				"Error pic 0: " + errorPics1.get(0) + "\n" + 
-				"Error pic 1: " + errorPics1.get(1) + "\n");
+				"Returned: " + ret1 + "\n" + errStr1);
 //		Expected output:
 //		registerNewUser test 1:
 //		Sending JSON: {"pictures":[{"pictureId":"0","base64":"eRHR0cDovL3NhZHNhZnNhZnNmc2ZzYWY="},{"pictureId":"1","base64":"aHR0cDovL3NhZHNhZnNhZnNmc2ZzYWY="}]}
@@ -141,10 +150,11 @@ public class Tests {
 					StringBuilder outMsg		
 				)->
 		{
+			String errStr3 = new String();
+			for(int i = 0; i < outB64BadPics.size(); i++)
+				errStr3 += "Error pic "+ Integer.toString(i) +": " + outB64BadPics.get(i) + "\n";
 			System.out.println("Message: " + outMsg.toString() + "\n" + 
-					"Returned: " + outErrorCode + "\n" +
-					"Error pic 0: " + outB64BadPics.get(0) + "\n" + 
-					"Error pic 1: " + outB64BadPics.get(1) + "\n");
+					"Returned: " + outErrorCode + "\n" + errStr3);
 		});
 //		Expected output:
 //		registerNewUser test 1:
